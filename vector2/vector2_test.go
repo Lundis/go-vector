@@ -147,6 +147,13 @@ func TestVector2_Normalize(t *testing.T) {
 	assert.True(t, aa.Equals(bb))
 }
 
+func TestVector2_NormalizeZero(t *testing.T) {
+	a := New(0, 0)
+	aa := a.Normalize()
+
+	assert.True(t, aa.Equals(a))
+}
+
 func TestVector2_Reflect(t *testing.T) {
 	a := New(2, 1)
 	b := New(6, 6)
