@@ -254,3 +254,11 @@ func TestLerp(t *testing.T) {
 	assert.Equal(t, res.Y, 5.0)
 	assert.Equal(t, res.Z, 5.0)
 }
+
+func TestIsZero(t *testing.T) {
+	assert.Equal(t, New(0, 0, 0).IsZero(), true)
+	assert.Equal(t, New(0.000001, 0.000001, 0.000001).IsZero(), false)
+	assert.Equal(t, New(1, 0, 0).IsZero(), false)
+	assert.Equal(t, New(0, 1, 0).IsZero(), false)
+	assert.Equal(t, New(0, 1, 1).IsZero(), false)
+}

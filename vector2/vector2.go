@@ -145,6 +145,10 @@ func (v Vector2) Equals(other Vector2) bool {
 	return v.X == other.X && v.Y == other.Y
 }
 
+func (v Vector2) IsZero() bool {
+	return v.X == 0 && v.Y == 0
+}
+
 func (v Vector2) String() string {
 	return fmt.Sprintf("Vector2(%f, %f)", v.X, v.Y)
 }
