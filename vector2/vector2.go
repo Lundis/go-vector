@@ -38,8 +38,12 @@ func New(x float64, y float64) Vector2 {
 	return Vector2{X: x, Y: y}
 }
 
-func (v Vector2) Add(other Vector2) Vector2 {
-	return New(v.X+other.X, v.Y+other.Y)
+func (v Vector2) Add(other ...Vector2) Vector2 {
+	for _, o := range other {
+		v.X += o.X
+		v.Y += o.Y
+	}
+	return v
 }
 
 func (v Vector2) AddScalar(scalar float64) Vector2 {
@@ -50,8 +54,12 @@ func (v Vector2) AddScalars(x float64, y float64) Vector2 {
 	return New(v.X+x, v.Y+y)
 }
 
-func (v Vector2) Sub(other Vector2) Vector2 {
-	return New(v.X-other.X, v.Y-other.Y)
+func (v Vector2) Sub(other ...Vector2) Vector2 {
+	for _, o := range other {
+		v.X -= o.X
+		v.Y -= o.Y
+	}
+	return v
 }
 
 func (v Vector2) SubScalar(scalar float64) Vector2 {
@@ -62,8 +70,12 @@ func (v Vector2) SubScalars(x float64, y float64) Vector2 {
 	return New(v.X-x, v.Y-y)
 }
 
-func (v Vector2) Mul(other Vector2) Vector2 {
-	return New(v.X*other.X, v.Y*other.Y)
+func (v Vector2) Mul(other ...Vector2) Vector2 {
+	for _, o := range other {
+		v.X *= o.X
+		v.Y *= o.Y
+	}
+	return v
 }
 
 func (v Vector2) MulScalar(scalar float64) Vector2 {
@@ -74,8 +86,12 @@ func (v Vector2) MulScalars(x float64, y float64) Vector2 {
 	return New(v.X*x, v.Y*y)
 }
 
-func (v Vector2) Div(other Vector2) Vector2 {
-	return New(v.X/other.X, v.Y/other.Y)
+func (v Vector2) Div(other ...Vector2) Vector2 {
+	for _, o := range other {
+		v.X /= o.X
+		v.Y /= o.Y
+	}
+	return v
 }
 
 func (v Vector2) DivScalar(scalar float64) Vector2 {
