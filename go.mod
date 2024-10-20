@@ -1,4 +1,4 @@
-module github.com/deeean/go-vector
+module github.com/Lundis/go-vector
 
 go 1.22
 

@@ -13,22 +13,6 @@ func TestNew(t *testing.T) {
 	assert.Equal(t, a.Y, 4.0)
 }
 
-func TestVector2_Copy(t *testing.T) {
-	a := New(2, 4)
-	res := a.Copy()
-
-	assert.Equal(t, a.X, res.X)
-	assert.Equal(t, a.Y, res.Y)
-}
-
-func TestVector2_Set(t *testing.T) {
-	a := New(2, 4)
-	a.Set(5, 4)
-
-	assert.Equal(t, a.X, 5.0)
-	assert.Equal(t, a.Y, 4.0)
-}
-
 func TestVector2_Add(t *testing.T) {
 	a := New(1, 2)
 	b := New(4, 3)

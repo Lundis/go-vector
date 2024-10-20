@@ -14,24 +14,6 @@ func TestNew(t *testing.T) {
 	assert.Equal(t, a.Z, 6.0)
 }
 
-func TestVector3_Copy(t *testing.T) {
-	a := New(2, 4, 6)
-	res := a.Copy()
-
-	assert.Equal(t, a.X, res.X)
-	assert.Equal(t, a.Y, res.Y)
-	assert.Equal(t, a.Z, res.Z)
-}
-
-func TestVector3_Set(t *testing.T) {
-	a := New(2, 4, 6)
-	a.Set(5, 4, 5)
-
-	assert.Equal(t, a.X, 5.0)
-	assert.Equal(t, a.Y, 4.0)
-	assert.Equal(t, a.Z, 5.0)
-}
-
 func TestVector3_Add(t *testing.T) {
 	a := New(1, 2, 3)
 	b := New(4, 3, 1)
