@@ -5,125 +5,141 @@ import (
 	"math"
 )
 
-type Vector2 struct {
-	X, Y float64
+type SignedInteger interface {
+	~int8 | ~int16 | ~int32 | ~int64 | ~int
 }
 
-func Dot(ihs Vector2, rhs Vector2) float64 {
-	return ihs.X*rhs.X + ihs.Y*rhs.Y
+type Float interface {
+	~float32 | ~float64
 }
 
-func Lerp(a Vector2, b Vector2, t float64) Vector2 {
-	return New(
-		a.X+(b.X-a.X)*t,
-		a.Y+(b.Y-a.Y)*t,
-	)
+type Number interface {
+	SignedInteger | Float
 }
 
-func Distance(a Vector2, b Vector2) float64 {
-	dx := a.X - b.X
-	dy := a.Y - b.Y
-	return math.Sqrt(dx*dx + dy*dy)
+type Vector2[T Number] struct {
+	X, Y T
 }
 
-func Reflect(ihs Vector2, rhs Vector2) Vector2 {
-	factor := -2.0 * Dot(ihs, rhs)
-	return New(
-		factor*ihs.X+rhs.X,
-		factor*ihs.Y+rhs.Y,
-	)
+func NewInt[T Number](x, y T) Vector2[int] {
+	return Vector2[int]{X: int(x), Y: int(y)}
 }
 
-func New(x float64, y float64) Vector2 {
-	return Vector2{X: x, Y: y}
+func NewFloat32[T Number](x, y T) Vector2[float32] {
+	return Vector2[float32]{X: float32(x), Y: float32(y)}
 }
 
-func (v Vector2) Add(other ...Vector2) Vector2 {
+func NewFloat64[T Number](x, y T) Vector2[float64] {
+	return Vector2[float64]{X: float64(x), Y: float64(y)}
+}
+
+func NewFloat64Polar[T1, T2 Number](angle T1, radius T2) Vector2[float64] {
+	return Vector2[float64]{
+		X: float64(radius) * math.Cos(float64(angle)),
+		Y: float64(radius) * math.Sin(float64(angle)),
+	}
+}
+
+func Add[T1, T2 Number](v Vector2[T1], other ...Vector2[T2]) Vector2[T1] {
 	for _, o := range other {
-		v.X += o.X
-		v.Y += o.Y
+		v.X += T1(o.X)
+		v.Y += T1(o.Y)
 	}
 	return v
 }
 
-func (v Vector2) AddScalar(scalar float64) Vector2 {
-	return New(v.X+scalar, v.Y+scalar)
+func (v Vector2[T]) AddScalar(scalar T) Vector2[T] {
+	return v.AddScalars(scalar, scalar)
 }
 
-func (v Vector2) AddScalars(x float64, y float64) Vector2 {
-	return New(v.X+x, v.Y+y)
+func (v Vector2[T]) AddScalars(x, y T) Vector2[T] {
+	v.X += x
+	v.Y += y
+	return v
 }
 
-func (v Vector2) Sub(other ...Vector2) Vector2 {
+func Sub[T1, T2 Number](v Vector2[T1], other ...Vector2[T2]) Vector2[T1] {
 	for _, o := range other {
-		v.X -= o.X
-		v.Y -= o.Y
+		v.X -= T1(o.X)
+		v.Y -= T1(o.Y)
 	}
 	return v
 }
 
-func (v Vector2) SubScalar(scalar float64) Vector2 {
-	return New(v.X-scalar, v.Y-scalar)
+func (v Vector2[T]) SubScalar(scalar T) Vector2[T] {
+	return v.SubScalars(scalar, scalar)
 }
 
-func (v Vector2) SubScalars(x float64, y float64) Vector2 {
-	return New(v.X-x, v.Y-y)
+func (v Vector2[T]) SubScalars(x, y T) Vector2[T] {
+	v.X -= x
+	v.Y -= y
+	return v
 }
 
-func (v Vector2) Mul(other ...Vector2) Vector2 {
+func Mul[T1, T2 Number](v Vector2[T1], other ...Vector2[T2]) Vector2[T1] {
 	for _, o := range other {
-		v.X *= o.X
-		v.Y *= o.Y
+		v.X *= T1(o.X)
+		v.Y *= T1(o.Y)
 	}
 	return v
 }
 
-func (v Vector2) MulScalar(scalar float64) Vector2 {
-	return New(v.X*scalar, v.Y*scalar)
+func (v Vector2[T]) MulScalar(scalar T) Vector2[T] {
+	return v.MulScalars(scalar, scalar)
 }
 
-func (v Vector2) MulScalars(x float64, y float64) Vector2 {
-	return New(v.X*x, v.Y*y)
+func (v Vector2[T]) MulScalars(x, y T) Vector2[T] {
+	v.X *= x
+	v.Y *= y
+	return v
 }
 
-func (v Vector2) Div(other ...Vector2) Vector2 {
+func Div[T1, T2 Number](v Vector2[T1], other ...Vector2[T2]) Vector2[T1] {
 	for _, o := range other {
-		v.X /= o.X
-		v.Y /= o.Y
+		v.X /= T1(o.X)
+		v.Y /= T1(o.Y)
 	}
 	return v
 }
 
-func (v Vector2) DivScalar(scalar float64) Vector2 {
-	return New(v.X/scalar, v.Y/scalar)
+func (v Vector2[T]) DivScalar(scalar T) Vector2[T] {
+	return v.DivScalars(scalar, scalar)
 }
 
-func (v Vector2) DivScalars(x float64, y float64) Vector2 {
-	return New(v.X/x, v.Y/y)
+func (v Vector2[T]) DivScalars(x, y T) Vector2[T] {
+	v.X /= x
+	v.Y /= y
+	return v
 }
 
-func (v Vector2) Distance(other Vector2) float64 {
-	dx := v.X - other.X
-	dy := v.Y - other.Y
-	return math.Sqrt(dx*dx + dy*dy)
+func Distance[T1, T2 Number](v Vector2[T1], other Vector2[T2]) T1 {
+	dx := float64(v.X) - float64(other.X)
+	dy := float64(v.Y) - float64(other.Y)
+	return T1(math.Sqrt(dx*dx + dy*dy))
 }
 
-func (v Vector2) Dot(other Vector2) float64 {
-	return v.X*other.X + v.Y*other.Y
+func DistanceSquared[T1, T2 Number](v Vector2[T1], other Vector2[T2]) T1 {
+	dx := float64(v.X) - float64(other.X)
+	dy := float64(v.Y) - float64(other.Y)
+	return T1(dx*dx + dy*dy)
 }
 
-func (v Vector2) Lerp(other Vector2, t float64) Vector2 {
-	return New(
-		v.X+(other.X-v.X)*t,
-		v.Y+(other.Y-v.Y)*t,
-	)
+func Dot[T1, T2 Number](v Vector2[T1], other Vector2[T2]) T1 {
+	return v.X*T1(other.X) + v.Y*T1(other.Y)
 }
 
-func (v Vector2) Magnitude() float64 {
-	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+func Lerp[T1, T2, T Number](v Vector2[T1], other Vector2[T2], t T) Vector2[T1] {
+	return Vector2[T1]{
+		X: v.X + (T1(other.X)-v.X)*T1(t),
+		Y: v.Y + (T1(other.Y)-v.Y)*T1(t),
+	}
 }
 
-func (v Vector2) Normalize() Vector2 {
+func (v Vector2[T]) Magnitude() T {
+	return T(math.Sqrt(float64(v.X*v.X + v.Y*v.Y)))
+}
+
+func (v Vector2[T]) Normalize() Vector2[T] {
 	m := v.Magnitude()
 
 	if m > 0.0 {
@@ -133,22 +149,32 @@ func (v Vector2) Normalize() Vector2 {
 	}
 }
 
-func (v Vector2) Reflect(other Vector2) Vector2 {
-	factor := -2.0 * v.Dot(other)
-	return New(
-		factor*v.X+other.X,
-		factor*v.Y+other.Y,
-	)
+func Reflect[T1, T2 Number](v Vector2[T1], other Vector2[T2]) Vector2[T1] {
+	dummy := v.X
+	dummy = T1(-2.0)
+	factor := dummy * Dot(v, other)
+	return Vector2[T1]{
+		X: factor*v.X + T1(other.X),
+		Y: factor*v.Y + T1(other.Y),
+	}
 }
 
-func (v Vector2) Equals(other Vector2) bool {
+func (v Vector2[T]) Equals(other Vector2[T]) bool {
 	return v.X == other.X && v.Y == other.Y
 }
 
-func (v Vector2) IsZero() bool {
+func (v Vector2[T]) IsZero() bool {
 	return v.X == 0 && v.Y == 0
 }
 
-func (v Vector2) String() string {
-	return fmt.Sprintf("Vector2(%f, %f)", v.X, v.Y)
+func (v Vector2[T]) String() string {
+	return fmt.Sprintf("Vector2(%v, %v)", v.X, v.Y)
+}
+
+func (v Vector2[T]) AsFloat32() Vector2[float32] {
+	return Vector2[float32]{X: float32(v.X), Y: float32(v.Y)}
+}
+
+func (v Vector2[T]) AsFloat64() Vector2[float64] {
+	return Vector2[float64]{X: float64(v.X), Y: float64(v.Y)}
 }
