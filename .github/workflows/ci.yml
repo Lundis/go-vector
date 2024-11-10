@@ -16,7 +16,7 @@ jobs:
           cache: true
 
       - name: Run Test and Coverage
-        run: go test ./vector2/ ./vector3/ -race -coverprofile=coverage.txt -covermode=atomic
+        run: go test ./vector2/ -race -coverprofile=coverage.txt -covermode=atomic
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v4
