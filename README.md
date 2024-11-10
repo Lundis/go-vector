@@ -1,12 +1,12 @@
 # go-vector
-A Vector library for 2D and 3D applications. Forked from [deeean/go-vector](https://github.com/deeean/go-vector), with the main change being that all vector parameters aren't pointers.
+A Vector library for 2D applications. Forked from [deeean/go-vector](https://github.com/deeean/go-vector), with the main change being that the vector parameters aren't pointers, and the struct is generically typed.
 
 [![github-actions](https://github.com/Lundis/go-vector/actions/workflows/ci.yml/badge.svg)](https://github.com/Lundis/go-vector)
 [![codecov](https://codecov.io/gh/Lundis/go-vector/graph/badge.svg?token=YAFDG1MSZD)](https://codecov.io/gh/Lundis/go-vector)
 
 ## Installation
 ```shell
-go get -u github.com/Lundis/go-vector/[vector3|vector2]
+go get -u github.com/Lundis/go-vector/vector2
 ```
 
 ## Usage
@@ -15,20 +15,13 @@ package main
 
 import (
 	"fmt"
-	"github.com/Lundis/go-vector/vector3"
+	"github.com/Lundis/go-vector/vector2"
 )
 
 func main() {
 	// basic usage
-	a := vector3.New(1, 2, 3)
-	b := vector3.New(1, 2, 3)
-	fmt.Println(a.Add(b))
-
-	// method chaining
-	c := vector3.New(0, 3, 5).
-		DivScalars(1, 2, 4).
-		MulScalars(0, 5, 3).
-		Magnitude()
-	fmt.Println(c)
+	a := vector2.NewFloat64(1, 2)
+	b := vector2.NewFloat32(3, 4)
+	fmt.Println(vector2.Add(a, b))
 }
 ```
