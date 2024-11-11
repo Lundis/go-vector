@@ -323,3 +323,14 @@ func TestMax(t *testing.T) {
 	assert.Equal(t, 17.0, c.X)
 	assert.Equal(t, 10.0, c.Y)
 }
+
+func TestVector2_Clamp(t *testing.T) {
+	low := NewFloat64(-5, -13)
+	high := NewFloat64(17, 10)
+	a := NewFloat64(-100, -100).Clamp(low, high)
+	b := NewFloat64(100, 100).Clamp(low, high)
+	assert.Equal(t, low.X, a.X)
+	assert.Equal(t, low.Y, a.Y)
+	assert.Equal(t, high.X, b.X)
+	assert.Equal(t, high.Y, b.Y)
+}

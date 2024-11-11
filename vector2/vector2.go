@@ -228,3 +228,7 @@ func Min[T1, T2 Number](v Vector2[T1], other ...Vector2[T2]) Vector2[T1] {
 	}
 	return v
 }
+
+func (v Vector2[T]) Clamp(low, high Vector2[T]) Vector2[T] {
+	return Max(low, Min(v, high))
+}
