@@ -334,3 +334,9 @@ func TestVector2_Clamp(t *testing.T) {
 	assert.Equal(t, high.X, b.X)
 	assert.Equal(t, high.Y, b.Y)
 }
+
+func TestVector2_Round(t *testing.T) {
+	a := NewFloat64(-3.4, 5.5).Round()
+	assert.Equal(t, math.Round(-3.4), a.X)
+	assert.Equal(t, math.Round(5.5), a.Y)
+}

@@ -232,3 +232,9 @@ func Min[T1, T2 Number](v Vector2[T1], other ...Vector2[T2]) Vector2[T1] {
 func (v Vector2[T]) Clamp(low, high Vector2[T]) Vector2[T] {
 	return Max(low, Min(v, high))
 }
+
+func (v Vector2[T]) Round() Vector2[T] {
+	v.X = T(math.Round(float64(v.X)))
+	v.Y = T(math.Round(float64(v.Y)))
+	return v
+}
