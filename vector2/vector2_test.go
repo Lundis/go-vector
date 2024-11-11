@@ -299,3 +299,27 @@ func TestVector2_Self(t *testing.T) {
 	res := a.Self()
 	assert.Equal(t, a, res)
 }
+
+func TestNewFloat64Random(t *testing.T) {
+	for i := 0.0; i < 100; i++ {
+		a := NewFloat64Random(-1, i)
+		assert.True(t, -1 <= a.X && a.X <= i)
+		assert.True(t, -1 <= a.Y && a.Y <= i)
+	}
+}
+
+func TestMin(t *testing.T) {
+	a := NewFloat64Random(-5, 10)
+	b := NewFloat64Random(17, -13)
+	c := Min(a, b)
+	assert.Equal(t, -5, c.X)
+	assert.Equal(t, -13, c.Y)
+}
+
+func TestMax(t *testing.T) {
+	a := NewFloat64Random(-5, 10)
+	b := NewFloat64Random(17, -13)
+	c := Max(a, b)
+	assert.Equal(t, 17, c.X)
+	assert.Equal(t, 10, c.Y)
+}

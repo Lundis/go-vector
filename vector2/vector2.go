@@ -3,6 +3,7 @@ package vector2
 import (
 	"fmt"
 	"math"
+	"math/rand/v2"
 )
 
 type SignedInteger interface {
@@ -201,5 +202,29 @@ func (v Vector2[T]) Angle() float64 {
 func (v Vector2[T]) Abs() Vector2[T] {
 	v.X = T(math.Abs(float64(v.X)))
 	v.Y = T(math.Abs(float64(v.Y)))
+	return v
+}
+
+func NewFloat64Random[T Number](minValue, maxValue T) Vector2[float64] {
+	spread := float64(maxValue - minValue)
+	return NewFloat64(
+		float64(minValue)+rand.Float64()*spread,
+		float64(minValue)+rand.Float64()*spread,
+	)
+}
+
+func Max[T1, T2 Number](v Vector2[T1], other ...Vector2[T2]) Vector2[T1] {
+	for _, o := range other {
+		v.X = max(v.X, T1(o.X))
+		v.Y = max(v.Y, T1(o.Y))
+	}
+	return v
+}
+
+func Min[T1, T2 Number](v Vector2[T1], other ...Vector2[T2]) Vector2[T1] {
+	for _, o := range other {
+		v.X = min(v.X, T1(o.X))
+		v.Y = min(v.Y, T1(o.Y))
+	}
 	return v
 }
