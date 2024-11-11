@@ -309,17 +309,17 @@ func TestNewFloat64Random(t *testing.T) {
 }
 
 func TestMin(t *testing.T) {
-	a := NewFloat64Random(-5, 10)
-	b := NewFloat64Random(17, -13)
+	a := NewFloat64(-5, 10)
+	b := NewFloat64(17, -13)
 	c := Min(a, b)
-	assert.Equal(t, -5, c.X)
-	assert.Equal(t, -13, c.Y)
+	assert.Equal(t, -5.0, c.X)
+	assert.Equal(t, -13.0, c.Y)
 }
 
 func TestMax(t *testing.T) {
-	a := NewFloat64Random(-5, 10)
-	b := NewFloat64Random(17, -13)
+	a := NewFloat64(-5, 10)
+	b := NewFloat64(17, -13)
 	c := Max(a, b)
-	assert.Equal(t, 17, c.X)
-	assert.Equal(t, 10, c.Y)
+	assert.Equal(t, 17.0, c.X)
+	assert.Equal(t, 10.0, c.Y)
 }
