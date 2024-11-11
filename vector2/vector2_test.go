@@ -196,7 +196,7 @@ func TestDistanceSquared(t *testing.T) {
 	b := NewFloat64(4, 3)
 	res := DistanceSquared(a, b)
 
-	assert.Equal(t, res, 3*3+1*1)
+	assert.Equal(t, float64(3*3+1*1), res)
 }
 
 func TestDot(t *testing.T) {
