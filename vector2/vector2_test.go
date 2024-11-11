@@ -257,3 +257,45 @@ func TestIsBetweenInclusive(t *testing.T) {
 	assert.Equal(t, true, IsBetweenInclusive(b, a, c))
 	assert.Equal(t, false, IsBetweenInclusive(c, b, c))
 }
+
+func TestVector2_InvertY(t *testing.T) {
+	a := NewFloat64(1, 2)
+	res := a.InvertY()
+	assert.Equal(t, -2.0, res.Y)
+}
+
+func TestVector2_Angle(t *testing.T) {
+	a := NewFloat64Polar(1, 17)
+	res := a.Angle()
+	assert.Equal(t, 1.0, res)
+
+	a = NewFloat64Polar(1.84, 17)
+	res = a.Angle()
+	assert.Equal(t, 1.84, res)
+}
+
+type MyAlias = Vector2[float64]
+
+func TestAlias(t *testing.T) {
+	a := MyAlias{
+		X: 1,
+		Y: 2,
+	}
+	b := NewFloat64(10, 20)
+	c := Add(a, b)
+	assert.Equal(t, 11.0, c.X)
+	assert.Equal(t, 22.0, c.Y)
+}
+
+func TestVector2_Abs(t *testing.T) {
+	a := NewFloat64(-1, -2)
+	res := a.Abs()
+	assert.Equal(t, 1.0, res.X)
+	assert.Equal(t, 2.0, res.Y)
+}
+
+func TestVector2_Self(t *testing.T) {
+	a := NewFloat64(-1, -2)
+	res := a.Self()
+	assert.Equal(t, a, res)
+}

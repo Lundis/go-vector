@@ -21,6 +21,11 @@ type Vector2[T Number] struct {
 	X, Y T
 }
 
+// Self is useful if you want to build complex stuff with interfaces
+func (v Vector2[T]) Self() Vector2[T] {
+	return v
+}
+
 func NewInt[T Number](x, y T) Vector2[int] {
 	return Vector2[int]{X: int(x), Y: int(y)}
 }
@@ -182,4 +187,19 @@ func (v Vector2[T]) AsFloat64() Vector2[float64] {
 func IsBetweenInclusive[T1, T2, T3 Number](p Vector2[T1], left Vector2[T2], right Vector2[T3]) bool {
 	return float64(left.X) <= float64(p.X) && float64(p.X) <= float64(right.X) &&
 		float64(left.Y) <= float64(p.Y) && float64(p.Y) <= float64(right.X)
+}
+
+func (v Vector2[T]) InvertY() Vector2[T] {
+	v.Y = -v.Y
+	return v
+}
+
+func (v Vector2[T]) Angle() float64 {
+	return math.Atan2(float64(v.Y), float64(v.X))
+}
+
+func (v Vector2[T]) Abs() Vector2[T] {
+	v.X = T(math.Abs(float64(v.X)))
+	v.Y = T(math.Abs(float64(v.Y)))
+	return v
 }
