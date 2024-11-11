@@ -178,3 +178,8 @@ func (v Vector2[T]) AsFloat32() Vector2[float32] {
 func (v Vector2[T]) AsFloat64() Vector2[float64] {
 	return Vector2[float64]{X: float64(v.X), Y: float64(v.Y)}
 }
+
+func IsBetweenInclusive[T1, T2, T3 Number](p Vector2[T1], left Vector2[T2], right Vector2[T3]) bool {
+	return float64(left.X) <= float64(p.X) && float64(p.X) <= float64(right.X) &&
+		float64(left.Y) <= float64(p.Y) && float64(p.Y) <= float64(right.X)
+}

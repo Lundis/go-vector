@@ -26,6 +26,7 @@ func TestNewFloat64(t *testing.T) {
 	assert.Equal(t, a.X, 2.0)
 	assert.Equal(t, a.Y, 4.0)
 }
+
 func TestNewFloat64Polar(t *testing.T) {
 	a := NewFloat64Polar(0, 1000) // right
 
@@ -245,4 +246,14 @@ func TestAsFloat64(t *testing.T) {
 
 	assert.Equal(t, res.X, 1.0)
 	assert.Equal(t, res.Y, 2.0)
+}
+
+func TestIsBetweenInclusive(t *testing.T) {
+	a := NewFloat32(1, 2)
+	b := NewFloat64(3, 2)
+	c := NewInt(5, 10)
+
+	assert.Equal(t, false, IsBetweenInclusive(a, b, c))
+	assert.Equal(t, true, IsBetweenInclusive(b, a, c))
+	assert.Equal(t, false, IsBetweenInclusive(c, b, c))
 }
