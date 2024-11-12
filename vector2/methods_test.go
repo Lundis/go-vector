@@ -170,3 +170,15 @@ func TestRound(t *testing.T) {
 	assert.Equal(t, math.Round(-3.4), a.X)
 	assert.Equal(t, math.Round(5.5), a.Y)
 }
+
+func TestCeil(t *testing.T) {
+	a := NewFloat64(-3.4, 5.5).Ceil()
+	assert.Equal(t, math.Ceil(-3.4), a.X)
+	assert.Equal(t, math.Ceil(5.5), a.Y)
+}
+
+func TestFloor(t *testing.T) {
+	a := NewFloat64(-3.4, 5.5).Floor()
+	assert.Equal(t, math.Floor(-3.4), a.X)
+	assert.Equal(t, math.Floor(5.5), a.Y)
+}

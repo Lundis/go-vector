@@ -111,3 +111,15 @@ func (v Vector2[T]) Round() Vector2[T] {
 	v.Y = T(math.Round(float64(v.Y)))
 	return v
 }
+
+func (v Vector2[T]) Floor() Vector2[T] {
+	v.X = T(math.Floor(float64(v.X)))
+	v.Y = T(math.Floor(float64(v.Y)))
+	return v
+}
+
+func (v Vector2[T]) Ceil() Vector2[T] {
+	v.X = T(math.Ceil(float64(v.X)))
+	v.Y = T(math.Ceil(float64(v.Y)))
+	return v
+}
