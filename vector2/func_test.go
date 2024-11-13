@@ -101,10 +101,10 @@ func TestMax(t *testing.T) {
 
 func TestIsBetweenInclusive(t *testing.T) {
 	a := NewFloat32(1, 2)
-	b := NewFloat64(3, 2)
+	b := NewFloat64(3, 6)
 	c := NewInt(5, 10)
 
 	assert.Equal(t, false, IsBetweenInclusive(a, b, c))
 	assert.Equal(t, true, IsBetweenInclusive(b, a, c))
-	assert.Equal(t, false, IsBetweenInclusive(c, b, c))
+	assert.Equal(t, false, IsBetweenInclusive(c, a, b))
 }
