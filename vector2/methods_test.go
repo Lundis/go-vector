@@ -188,3 +188,9 @@ func TestSwap(t *testing.T) {
 	assert.Equal(t, -3.4, a.Y)
 	assert.Equal(t, 5.5, a.X)
 }
+
+func TestPerpendicular(t *testing.T) {
+	a := NewFloat64(-3.4, 5.5).Perpendicular()
+	assert.Equal(t, 3.4, a.Y)
+	assert.Equal(t, 5.5, a.X)
+}
