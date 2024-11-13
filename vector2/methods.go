@@ -123,3 +123,8 @@ func (v Vector2[T]) Ceil() Vector2[T] {
 	v.Y = T(math.Ceil(float64(v.Y)))
 	return v
 }
+
+func (v Vector2[T]) Swap() Vector2[T] {
+	v.X, v.Y = v.Y, v.X
+	return v
+}

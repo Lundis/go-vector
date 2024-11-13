@@ -182,3 +182,9 @@ func TestFloor(t *testing.T) {
 	assert.Equal(t, math.Floor(-3.4), a.X)
 	assert.Equal(t, math.Floor(5.5), a.Y)
 }
+
+func TestSwap(t *testing.T) {
+	a := NewFloat64(-3.4, 5.5).Swap()
+	assert.Equal(t, -3.4, a.Y)
+	assert.Equal(t, 5.5, a.X)
+}
