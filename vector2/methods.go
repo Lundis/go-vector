@@ -133,3 +133,13 @@ func (v Vector2[T]) Perpendicular() Vector2[T] {
 	v.X, v.Y = v.Y, -v.X
 	return v
 }
+
+func (v Vector2[T]) WithX(value T) Vector2[T] {
+	v.X = value
+	return v
+}
+
+func (v Vector2[T]) WithY(value T) Vector2[T] {
+	v.Y = value
+	return v
+}

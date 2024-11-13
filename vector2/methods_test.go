@@ -194,3 +194,15 @@ func TestPerpendicular(t *testing.T) {
 	assert.Equal(t, 3.4, a.Y)
 	assert.Equal(t, 5.5, a.X)
 }
+
+func TestWithX(t *testing.T) {
+	a := NewFloat64(-3.4, 5.5).WithX(478.73)
+	assert.Equal(t, 478.73, a.X)
+	assert.Equal(t, 5.5, a.Y)
+}
+
+func TestWithY(t *testing.T) {
+	a := NewFloat64(-3.4, 5.5).WithY(478.73)
+	assert.Equal(t, -3.4, a.X)
+	assert.Equal(t, 478.73, a.Y)
+}
