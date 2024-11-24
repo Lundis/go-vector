@@ -143,3 +143,7 @@ func (v Vector2[T]) WithY(value T) Vector2[T] {
 	v.Y = value
 	return v
 }
+
+func (v Vector2[T]) Components() (x, y T) {
+	return v.X, v.Y
+}

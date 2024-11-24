@@ -206,3 +206,9 @@ func TestWithY(t *testing.T) {
 	assert.Equal(t, -3.4, a.X)
 	assert.Equal(t, 478.73, a.Y)
 }
+
+func TestComponents(t *testing.T) {
+	x, y := NewFloat64(-3.4, 5.5).Components()
+	assert.Equal(t, -3.4, x)
+	assert.Equal(t, 5.5, y)
+}
