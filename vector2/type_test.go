@@ -61,7 +61,11 @@ func TestEquals(t *testing.T) {
 
 func TestString(t *testing.T) {
 	a := NewFloat64(3, 6)
-	assert.Equal(t, "Vector2(3, 6)", a.String())
+	assert.Equal(t, "(3, 6)", a.String())
+	b := Vector2[int]{X: 3, Y: 6}
+	assert.Equal(t, "(3, 6)", b.String())
+	c := NewFloat64(3.5, 6.3)
+	assert.Equal(t, "(3.5000, 6.3000)", c.String())
 }
 
 func TestIsZero(t *testing.T) {

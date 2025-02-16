@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"math/rand/v2"
+	"strconv"
 )
 
 type Vector2[T Number] struct {
@@ -54,5 +55,16 @@ func (v Vector2[T]) IsZero() bool {
 }
 
 func (v Vector2[T]) String() string {
-	return fmt.Sprintf("Vector2(%v, %v)", v.X, v.Y)
+	var xString, yString string
+	if float64(v.X) == float64(int(v.X)) {
+		xString = strconv.Itoa(int(v.X))
+	} else {
+		xString = fmt.Sprintf("%.4f", float64(v.X))
+	}
+	if float64(v.Y) == float64(int(v.Y)) {
+		yString = strconv.Itoa(int(v.Y))
+	} else {
+		yString = fmt.Sprintf("%.4f", float64(v.Y))
+	}
+	return fmt.Sprintf("(%s, %s)", xString, yString)
 }
