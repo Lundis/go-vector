@@ -2,6 +2,7 @@ package vector2
 
 import (
 	"github.com/stretchr/testify/assert"
+	"math"
 	"testing"
 )
 
@@ -79,4 +80,17 @@ func TestSideOfLine(t *testing.T) {
 
 	p3 := NewFloat64(-0.5, 0.5)
 	assert.Greater(t, SideOfPoint(a, b, p3), 0.0)
+}
+
+func TestAngleBetween(t *testing.T) {
+	up := NewFloat64(0, 1)
+	upRight := NewFloat64(1, 1)
+	right := NewFloat64(1, 0)
+	down := NewFloat64(0, -1)
+
+	assert.Equal(t, math.Pi/2, AngleBetween(right, up), 0.0)
+	assert.Equal(t, math.Pi/4, AngleBetween(right, upRight), 0.0)
+	assert.Equal(t, -math.Pi/2, AngleBetween(up, right), 0.0)
+	assert.Equal(t, math.Pi, AngleBetween(up, down), 0.0)
+
 }

@@ -51,3 +51,14 @@ func SideOfPoint[T Number](a, b, p Vector2[T]) T {
 
 	return Cross(ab, ap)
 }
+
+// AngleBetween calculates the angle between two vectors, returning a value in the range [-Pi, Pi].
+func AngleBetween[T Number](v1, v2 Vector2[T]) float64 {
+	angle := v2.Angle() - v1.Angle()
+	if angle > math.Pi {
+		angle -= 2 * math.Pi
+	} else if angle <= -math.Pi {
+		angle += 2 * math.Pi
+	}
+	return angle
+}
