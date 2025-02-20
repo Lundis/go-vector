@@ -87,10 +87,13 @@ func TestAngleBetween(t *testing.T) {
 	upRight := NewFloat64(1, 1)
 	right := NewFloat64(1, 0)
 	down := NewFloat64(0, -1)
+	downLeft := NewFloat64(-1, -1)
 
-	assert.Equal(t, math.Pi/2, AngleBetween(right, up), 0.0)
-	assert.Equal(t, math.Pi/4, AngleBetween(right, upRight), 0.0)
-	assert.Equal(t, -math.Pi/2, AngleBetween(up, right), 0.0)
-	assert.Equal(t, math.Pi, AngleBetween(up, down), 0.0)
+	assert.Equal(t, math.Pi/2, AngleBetween(right, up))
+	assert.Equal(t, math.Pi/4, AngleBetween(right, upRight))
+	assert.Equal(t, -math.Pi/2, AngleBetween(up, right))
+	assert.Equal(t, math.Pi, AngleBetween(up, down))
+	assert.Equal(t, math.Pi*3/4, AngleBetween(up, downLeft))
+	assert.Equal(t, -math.Pi*3/4, AngleBetween(downLeft, up))
 
 }
